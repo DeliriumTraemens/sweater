@@ -41,7 +41,7 @@
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
         <div  class="card-group" th:each="m:${messages}">
-                <div class="card shadow p-3 mb-5 bg-white rounded">
+                <div class="card shadow p-3 mb-5 rounded" style="background-color: bisque">
                     <p  th:text="${m.getId()}"></p>
                     <p  th:text="${m.getText()}"></p>
                     <p  th:text="${m.getTag()}"></p>
