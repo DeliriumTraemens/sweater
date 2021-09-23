@@ -2,7 +2,6 @@ package org.nick.sweater.controller;
 
 import org.nick.sweater.domain.Message;
 import org.nick.sweater.repos.MessageRepo;
-import org.nick.sweater.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,13 +14,14 @@ public class MainController {
 
 	@Autowired
 	MessageRepo messageRepo;
-	@Autowired
-	UserRepo userRepo;
+	
+//	@Autowired
+//	UserRepo userRepo;
 	
 	@GetMapping("/")
 	public String greetingsId(){
 //		userRepo.deleteAll();
-		return "greetings";
+		return "main";
 	}
 	
 //	@GetMapping("/login")
