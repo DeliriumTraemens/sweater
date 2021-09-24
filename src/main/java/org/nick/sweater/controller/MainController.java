@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequestMapping("/")
 public class MainController {
 
 	@Autowired
@@ -20,7 +21,7 @@ public class MainController {
 //	UserRepo userRepo;
 	
 	
-	@GetMapping("/")
+	@GetMapping()
 	public String startPage(Model model){
 //		userRepo.deleteAll();
 		model.addAttribute("messages",messageRepo.findAll());
@@ -39,7 +40,7 @@ public class MainController {
 		return "main";
 	}
 	
-	@PostMapping("/main")
+	@PostMapping()
 	public String addMessage(@RequestParam String text, @RequestParam String tag){
 			messageRepo.save(new Message(text,tag));
 		return "main";
