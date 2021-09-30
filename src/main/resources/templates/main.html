@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"  lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -11,6 +11,11 @@
             integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </head>
 <body>
+<!--<div class="container">
+    <h4 th:text="${usrdetailes.getName()}">AAA</h4>
+    <h6 th:text="${auth.details}">AAA</h6>
+</div>-->
+
 <div class="container">
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Sign Out"/>
@@ -19,8 +24,10 @@
 <div class="container">
     <div>
         <form method="post">
-            <input type="text" name="text" placeholder="Введите сообщение">
-            <input type="text" name="tag" placeholder="Введите Тег">
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+
+            <input type="text" name="messagetext" placeholder="Введите сообщение">
+            <input type="text" name="messagetag" placeholder="Введите Тег">
             <button type="submit" class="btn btn-primary">Добавить</button>
         </form>
     </div>
@@ -29,13 +36,17 @@
     <h1>Список сообщений</h1>
     <div class="row mb-2">
         <form method="post" action="filter">
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+
             <input type="text" name="filter">
             <button type="submit" class="btn btn-primary">Найти</button>
         </form>
     </div>
     <div class="row mb-2">
         <form method="post" action="showall">
-<!--        <form method="post" action="/main">-->
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+
+            <!--        <form method="post" action="/main">-->
             <button type="submit" class="btn btn-primary">Показать все</button>
         </form>
     </div>

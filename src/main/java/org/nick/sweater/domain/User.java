@@ -18,6 +18,25 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
+    //--------Constructors----------//
+    
+    public User() {
+    }
+    
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+    
+    public User(Long id, String username, String password, boolean active, Set<Role> roles) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.active = active;
+        this.roles = roles;
+    }
+    
+    //------Getters-Setters-----//
     public Long getId() {
         return id;
     }
@@ -56,5 +75,18 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+    
+    //------ To String ---------//
+    
+    @Override
+    public String toString() {
+        return "\nUser{" +
+                       "id=" + id +
+                       ", username='" + username + '\'' +
+                       ", password='" + password + '\'' +
+                       ", active=" + active +
+                       ", roles=" + roles +
+                       '}';
     }
 }

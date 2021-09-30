@@ -3,6 +3,8 @@ package org.nick.sweater.controller;
 import org.nick.sweater.domain.Message;
 import org.nick.sweater.repos.MessageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,8 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
+
 @Controller
-@RequestMapping("/")
+//@RequestMapping("/")
 public class MainController {
 
 	@Autowired
@@ -21,29 +25,35 @@ public class MainController {
 //	UserRepo userRepo;
 	
 	
-	@GetMapping()
+	@GetMapping("/")
 	public String startPage(Model model){
 //		userRepo.deleteAll();
 		model.addAttribute("messages",messageRepo.findAll());
 		
-		return "main";
+		return "greetings";
 	}
 	
-//	@GetMapping("/login")
-//		public String loginPage(){
-//		return "login";
-//	}
+	@GetMapping("/login")
+		public String loginPage(){
+		return "login";
+	}
 	
+	// TODO: 30.09.2021 Разобраться с инжектом Principal
 	@GetMapping("/main")
-	public String main(Model model){
+	public String main(/*Principal principal, */Model model){
+//		Authentication a = SecurityContextHolder.getContext().getAuthentication();
+//		String username = principal.getName();
+//			model.addAttribute("auth",a);
+//			model.addAttribute("usrdetailes",principal);
 			model.addAttribute("messages",messageRepo.findAll());
 		return "main";
 	}
 	
-	@PostMapping()
-	public String addMessage(@RequestParam String text, @RequestParam String tag){
-			messageRepo.save(new Message(text,tag));
-		return "main";
+	@PostMapping("/main")
+	public String addMessage(@RequestParam String messagetext, @RequestParam String messagetag){
+		Message newMessage = new Message(messagetext,messagetag);
+		messageRepo.save(newMessage);
+		return "redirect:main";
 	}
 	
 //	<form method="post"  action="filter"> action="filter" -- Аргумент для маппинга
@@ -58,6 +68,11 @@ public class MainController {
 		}
 		return "main";
 	}
+	
+//	@GetMapping("/filter")
+//	public String filter(){
+//		return "main";
+//	}
 	
 	@PostMapping("showall")
 	public String showAll(Model model){
