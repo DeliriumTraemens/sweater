@@ -12,6 +12,10 @@ public class Message {
 	private String text;
 	private String tag;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id")
+	private User author;
+	
 	//----Constructors---//
 	
 	public Message() {
@@ -20,6 +24,18 @@ public class Message {
 	public Message(String text, String tag) {
 		this.text = text;
 		this.tag = tag;
+	}
+	
+	public Message(String text, String tag, User author) {
+		this.text = text;
+		this.tag = tag;
+		this.author = author;
+	}
+	
+	//----Methods---//
+	public String getAuthorName(){
+		return author !=null ? author.getUsername() : "<none>";
+		
 	}
 	//----Getters and Setterrs---//
 	
@@ -47,6 +63,14 @@ public class Message {
 		this.tag = tag;
 	}
 	
+	public User getAuthor() {
+		return author;
+	}
+	
+	public void setAuthor(User author) {
+		this.author = author;
+	}
+	
 	//----To String---//
 	
 	@Override
@@ -55,6 +79,7 @@ public class Message {
 				       "id=" + id +
 				       ", text='" + text + '\'' +
 				       ", tag='" + tag + '\'' +
+				       ", author=" + author +
 				       '}';
 	}
 }

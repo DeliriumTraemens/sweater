@@ -1,9 +1,11 @@
 package org.nick.sweater.controller;
 
 import org.nick.sweater.domain.Message;
+import org.nick.sweater.domain.User;
 import org.nick.sweater.repos.MessageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,9 +52,12 @@ public class MainController {
 	}
 	
 	@PostMapping("/main")
-	public String addMessage(@RequestParam String messagetext, @RequestParam String messagetag){
-		Message newMessage = new Message(messagetext,messagetag);
-		messageRepo.save(newMessage);
+	public String addMessage(@AuthenticationPrincipal User user,
+	                         @RequestParam String messagetext,
+	                         @RequestParam String messagetag){
+		
+//		Message newMessage = new Message(messagetext,messagetag,user);
+		messageRepo.save(new Message(messagetext,messagetag,user));
 		return "redirect:main";
 	}
 	
