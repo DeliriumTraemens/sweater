@@ -23,7 +23,7 @@
 </div>
 <div class="container">
     <div>
-        <form method="post">
+        <form method="post" action="main">
             <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
 
             <input type="text" name="messagetext" placeholder="Введите сообщение">
@@ -34,14 +34,15 @@
 </div><!--Container-->
 <div class="container">
     <h1>Список сообщений</h1>
+
     <div class="row mb-2">
-        <form method="post" action="filter">
-        <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+        <form method="get" action="/main">
 
             <input type="text" name="filter">
             <button type="submit" class="btn btn-primary">Найти</button>
         </form>
     </div>
+
     <div class="row mb-2">
         <form method="post" action="showall">
             <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
@@ -54,10 +55,11 @@
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-6 g-3">
         <div  class="card-group" th:each="m:${messages}">
                 <div class="card shadow p-3 mb-5 rounded" style="background-color: bisque">
-                    <p  th:text="${m.getId()}"></p>
+                    <p style="color:darkblue; font-weight: bold;font-size:10pt" th:text="${m.getId()}"></p>
                     <p  th:text="${m.getText()}"></p>
-                    <p  th:text="${m.getTag()}"></p>
-                    <p  th:text="'Author: '+${m.getAuthorName()}"></p>
+                    <p style="font-style: italic" th:text="${m.getTag()}"></p>
+<!--                    <p  th:text="'Author: '+${m.getAuthorName()}"></p>-->
+                    <p> Author:  <span  style="color:brown; font-weight:bold" th:text="${m.getAuthorName()}"></span></p>
                 </div>
             </div><!--CardGroup-->
 

@@ -40,14 +40,16 @@ public class MainController {
 		return "login";
 	}
 	
-	// TODO: 30.09.2021 Разобраться с инжектом Principal
 	@GetMapping("/main")
-	public String main(/*Principal principal, */Model model){
-//		Authentication a = SecurityContextHolder.getContext().getAuthentication();
-//		String username = principal.getName();
-//			model.addAttribute("auth",a);
-//			model.addAttribute("usrdetailes",principal);
-			model.addAttribute("messages",messageRepo.findAll());
+	public String main(@RequestParam(required = false) String filter, Model model){
+		
+		if (filter!=null && !filter.isEmpty()) {
+			model.addAttribute("messages", messageRepo.findByTag(filter));
+		} else {
+			model.addAttribute("messages", messageRepo.findAll());
+		}
+		
+		model.addAttribute("filter",filter);
 		return "main";
 	}
 	
@@ -62,17 +64,17 @@ public class MainController {
 	}
 	
 //	<form method="post"  action="filter"> action="filter" -- Аргумент для маппинга
-	@PostMapping("/filter")
-//	               <input type="text" name="filter"> || name="filter" Ловим в @RequestParam String filter
-	public String filter(@RequestParam String filter, Model model){
-		
-		if (filter!=null && !filter.isEmpty()) {
-			model.addAttribute("messages", messageRepo.findByTag(filter));
-		} else {
-			model.addAttribute("messages", messageRepo.findAll());
-		}
-		return "main";
-	}
+//	@PostMapping("/filter")
+////	               <input type="text" name="filter"> || name="filter" Ловим в @RequestParam String filter
+//	public String filter(@RequestParam String filter, Model model){
+//
+//		if (filter!=null && !filter.isEmpty()) {
+//			model.addAttribute("messages", messageRepo.findByTag(filter));
+//		} else {
+//			model.addAttribute("messages", messageRepo.findAll());
+//		}
+//		return "main";
+//	}
 	
 //	@GetMapping("/filter")
 //	public String filter(){
