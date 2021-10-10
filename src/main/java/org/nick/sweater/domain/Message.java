@@ -16,6 +16,8 @@ public class Message {
 	@JoinColumn(name = "user_id")
 	private User author;
 	
+	private String filename;
+	
 	//----Constructors---//
 	
 	public Message() {
@@ -30,6 +32,13 @@ public class Message {
 		this.text = text;
 		this.tag = tag;
 		this.author = author;
+	}
+	
+	public Message(String text, String tag, User author, String filename) {
+		this.text = text;
+		this.tag = tag;
+		this.author = author;
+		this.filename = filename;
 	}
 	
 	//----Methods---//
@@ -71,6 +80,13 @@ public class Message {
 		this.author = author;
 	}
 	
+	public String getFilename() {
+		return filename;
+	}
+	
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
 	//----To String---//
 	
 	@Override
@@ -80,6 +96,7 @@ public class Message {
 				       ", text='" + text + '\'' +
 				       ", tag='" + tag + '\'' +
 				       ", author=" + author +
+				       ", filename='" + filename + '\'' +
 				       '}';
 	}
 }
