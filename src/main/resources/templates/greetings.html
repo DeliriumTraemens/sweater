@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Getting Started: Serving Web Content</title>
@@ -11,20 +11,29 @@
             integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </head>
 <body>
+<header th:insert="header :: header"></header>
+
 <div class="container-fluid">
 <div>
     <h3>
-    Hello, user!
+    Hello,  <span sec:authentication="name"></span> <span>!</span>
     </h3>
-</div>
-<a href="/main" class="btn btn-primary mt-3">Main Page</a>
-<br>
-<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign Out" class="btn btn-success"/>
-</form>
+    <h6>It's a Simple Twitter Clone</h6>
 
-    <a href="/user" class="btn btn-warning mt-5">User List</a>
+<!--    <div sec:authorize="hasRole('USER')">Text visible to user.</div>-->
+<!--    <div sec:authorize="hasRole('ADMIN')">Text visible to admin.</div>-->
+<!--    <div sec:authorize="hasRole('ROLE_ADMIN')">-->
+<!--        This content is only shown to administrators.-->
+<!--    </div>-->
+<!--    <div sec:authorize="isAuthenticated()">-->
+<!--        Text visible only to authenticated users.-->
+<!--    </div>-->
+    Authenticated username:
+<!--    <div sec:authentication="name"></div>-->
+<!--    Authenticated user roles:-->
+<!--    <div sec:authentication="principal.authorities"></div>-->
+
+</div>
 </div>
 </body>
 </html>

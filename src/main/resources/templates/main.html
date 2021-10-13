@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"  lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -16,28 +17,36 @@
     <h4 th:text="${usrdetailes.getName()}">AAA</h4>
     <h6 th:text="${auth.details}">AAA</h6>
 </div>-->
+<header th:insert="header :: header"></header>
 
-<div class="container">
+<!--<div class="container">
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Sign Out"/>
     </form>
-</div>
-<div class="container">
+</div>-->
 
-    <fieldset>
-        <legend> Добавдение записи
-            <div>
-                <form method="post" action="/main" enctype="multipart/form-data">
-                    <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
 
-                    <input type="text" name="messagetext" placeholder="Введите сообщение"><br>
-                    <input type="text" name="messagetag" placeholder="Введите Тег"><br>
-                    <input type="file" name="file"><br>
-                    <button type="submit" class="btn btn-primary">Добавить</button>
-                </form>
-            </div>
-        </legend>
-    </fieldset>
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col"> <h6> Left column </h6></div>
+        <div class="col">
+            <fieldset>
+                <legend> Добавдение записи
+                    <div>
+                        <form method="post" action="/main" enctype="multipart/form-data">
+                            <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+
+                            <input type="text" class="form-control" name="messagetext" placeholder="Введите сообщение"><!--<br>-->
+                            <input type="text" class="form-control" name="messagetag" placeholder="Введите Тег"><!--<br>-->
+                            <input type="file" class="custom-file-input" data-preview-file-type="any" name="file"><!--<br>-->
+                            <button type="submit" class="btn btn-primary btn-sm">Добавить</button>
+                        </form>
+                    </div>
+                </legend>
+            </fieldset>
+        </div>
+        <div class="col"><h6> Right column </h6></div>
+    </div>
 
 </div><!--Container-->
 <div class="container">

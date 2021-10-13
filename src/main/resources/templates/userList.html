@@ -11,6 +11,8 @@
             integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </head>
 <body>
+<header th:insert="header :: header"></header>
+
 <div class="container-fluid">
     <h5>List of Users</h5>
     <h6 th:text="${users}"></h6><br>

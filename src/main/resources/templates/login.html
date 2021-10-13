@@ -23,15 +23,31 @@
     You have been logged out.
 </div>
 <br>
-<form th:action="@{/login}" method="post">
-    <input type="hidden" th:name="${_csrf}" th:value="${_csrf.token}" />
-    <div><label> User Name : <input class="text-input mb-2" type="text" name="username"/> </label></div>
-    <div><label> Password: <input class="text-input mb-2" type="password" name="password"/> </label></div>
-    <div><input class="btn btn-info mb-3" type="submit" value="Sign In"/></div>
-</form>
+<div class="container">
+    <form th:action="@{/login}" method="post">
+        <input type="hidden" th:name="${_csrf}" th:value="${_csrf.token}" />
+            <div class="mb-2 row">
+                <label for="inputUsername" class="col-sm-2 col-form-label"> User Name :  </label>
+                <div class="col-sm-6">
+                    <input class="form-control" type="text" name="username" id="inputUsername" placeholder="Введите Имя"/>
+                </div>
+            </div>
 
-<div>
-    <a th:href="@{/registration}" class="btn btn-danger"> Create an Account</a>
+            <div class="mb-2 row">
+                <label for="inputPassword" class="col-sm-2 col-form-label"> Password:  </label>
+                <div class="col-sm-6">
+                    <input class="form-control " type="password" name="password" id="inputPassword" placeholder="Введите Пароль"/>
+                </div>
+            </div>
+<!--            <button type="submit" class="btn btn-primary">Sign In</button>-->
+                <button class="btn btn-info mb-3" type="submit"/>Sign In</button>
+                    <a th:href="@{/registration}" class="btn btn-danger mb-3"> Create an Account</a>
+    </form>
+
 </div>
+
+<!--<div>-->
+<!--    <a th:href="@{/registration}" class="btn btn-danger"> Create an Account</a>-->
+<!--</div>-->
 </body>
 </html>
