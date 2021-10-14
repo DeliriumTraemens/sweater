@@ -16,6 +16,9 @@ public class User implements UserDetails {
     private String username;
     private String password;
     private boolean active;
+    
+    private String email;
+    private String activationCode;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
@@ -109,6 +112,21 @@ public class User implements UserDetails {
         this.roles = roles;
     }
     
+    public String getEmail() {
+        return email;
+    }
+    
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    public String getActivationCode() {
+        return activationCode;
+    }
+    
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
+    }
     //------ To String ---------//
     
     @Override
@@ -118,6 +136,7 @@ public class User implements UserDetails {
                        ", username='" + username + '\'' +
                        ", password='" + password + '\'' +
                        ", active=" + active +
+                       ", email='" + email + '\'' +
                        ", roles=" + roles +
                        '}';
     }
