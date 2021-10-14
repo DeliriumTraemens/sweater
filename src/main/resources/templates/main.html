@@ -57,16 +57,33 @@
             <fieldset>
                 <legend> Добавдение записи
                     <div>
+                        <div class="mb-3">
+                            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                Добавдение записи
+                            </a>
+                        </div>
+                        <div class="collapse" id="collapseExample">
+                            <div class=" mb-3">
+                                <form method="post" action="/main" enctype="multipart/form-data">
+                                    <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" name="messagetext" placeholder="Введите сообщение"><!--<br>-->
+                                        </div>
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" name="messagetag" placeholder="Введите Тег"><!--<br>-->
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="custom-file">
+                                                <label for="customFile" class="form-label">Выберите картинку</label>
+                                                <input type="file" class="form-control" data-preview-file-type="any" name="file" id="customFile"><!--<br>-->
+                                        </div>
+                                    </div>
 
-                        <form method="post" action="/main" enctype="multipart/form-data">
-                            <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
-
-                            <input type="text" class="form-control" name="messagetext" placeholder="Введите сообщение"><!--<br>-->
-                            <input type="text" class="form-control" name="messagetag" placeholder="Введите Тег"><!--<br>-->
-                            <input type="file" class="custom-file-input" data-preview-file-type="any" name="file"><!--<br>-->
-                            <button type="submit" class="btn btn-primary btn-sm">Добавить</button>
-                        </form>
-                    </div>
+                                    <button type="submit" class="btn btn-primary btn-sm">Добавить</button>
+                                </form>
+                            </div>
+                        </div>
+                        </div>
                 </legend>
             </fieldset>
         </div>
@@ -101,19 +118,28 @@
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-6 g-3">
         <div  class="card-group" th:each="m:${messages}">
                 <div class="card shadow p-3 mb-5 rounded" style="background-color: bisque">
-                    <p style="color:darkblue; font-weight: bold;font-size:10pt" th:text="${m.getId()}"></p>
-                    <p th:text="${m.getText()}"></p>
-                    <p style="font-style: italic" th:text="${m.getTag()}"></p>
-                    <p> Author:  <span  style="color:brown; font-weight:bold" th:text="${m.getAuthorName()}"></span></p>
+                    <div class="card-header mb-1">
+                        <div class="row">
+                            <div class="col badge bg-primary text-wrap" th:text="${m.getId()}"></div>
+                            <div class="col badge bg-warning text-wrap" th:text="${m.getTag()}"></div>
+                        </div>
 
-                    <div th:if="${m.filename != null}">
-                        <img th:src="@{'../img/'+ ${m.filename}}" height="100" width="100"/>
+                        <!--<p class="badge bg-primary text-wrap"  style="color:yellow; font-weight: bold;font-size:10pt" th:text="${m.getId()}">
+                            <p th:text="${m.getTag()}">-->
+
                     </div>
+                        <div th:if="${m.filename != null}">
+                            <img class="card-img-top" th:src="@{'../img/'+ ${m.filename}}" height="100" width="100"/>
+                        </div>
+                    <p th:text="${m.getText()}"></p>
+
 
                     <div th:if="${m.filename}">
                         <p th:text="${m.filename}"></p>
                     </div>
-
+                <div class="card-footer">
+                    <p> Author:  <span  style="color:brown; font-weight:bold" th:text="${m.getAuthorName()}"></span></p>
+                </div>
                 </div><!--Card-->
         </div><!--CardGroup-->
 
