@@ -25,14 +25,30 @@
 <!--        <input type="hidden" name="_csrf" th:value="${_csrf.token}" />-->
 <!--        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
 
+        <div class="mb-2 row">
+            <label for="inputUsername" class="col-sm-2 col-form-label"> User Name :  </label>
+            <div class="col-sm-6">
+                <input class="form-control" type="text" name="username" id="inputUsername" placeholder="Введите Имя"/>
+            </div>
+        </div>
 
-        <label for="username"> Username
+        <div class="mb-2 row">
+            <label for="inputPassword" class="col-sm-2 col-form-label"> Password:  </label>
+            <div class="col-sm-6">
+                <input class="form-control " type="password" name="password" id="inputPassword" placeholder="Введите Пароль"/>
+            </div>
+        </div>
+        <button class="btn btn-info mb-3" type="submit"/>Create Account</button>
+
+
+        <!--<label for="username"> Username
             <input type="text" name="username" id="username" placeholder="Input username here">
         </label> <br><br>
         <label for="password" >Password
             <input type="text" name="password" id="password" placeholder="Input password here">
         </label> <br><br>
-        <button type="submit" class="btn btn-primary">Create Account</button>
+        <button type="submit" class="btn btn-primary">Create Account</button>-->
+
     </form>
 </div-container-fluid>
 </body>
